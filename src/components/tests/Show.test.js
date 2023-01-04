@@ -3,7 +3,33 @@ import { render, fireEvent, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import Show from './../Show';
 
-test('hatasız çalışıyor', () => { });
+
+describe("Show none prop değeriyle çalışıyor mu?", () => {
+  beforeEach(() => {
+    render(<Show show="none" selectedSeason="none" />)
+  })
+
+  test('sayfada render ediliyor', () => {
+    const uyariKutusu = screen.getByTestId("bozuk-data-uyarisi");
+    expect(uyariKutusu).toBeInTheDocument();
+  });
+})
+
+describe("show=null olduğunda", () => {
+  beforeEach(() => {
+    render(<Show show={null} />)
+  })
+
+  test('Loading görünüyor mu?', () => {
+    const loadingKutusu = screen.getByTestId("loading-container");
+    expect(loadingKutusu.textContent).toBe("Fetching data...");
+  });
+})
+
+
+
+
+
 
 test('Loading bileşeni show propu null ken render ediliyor', () => { });
 
